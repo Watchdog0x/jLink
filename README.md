@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Watchdog0x/jLink/blob/main/LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Watchdog0x/jLink)](https://goreportcard.com/report/github.com/Watchdog0x/jLink)
 
-jLink is a command-line utility for controlling your Jabra headset.
+jLink is a command-line utility for controlling your Jabra headset. It supports all Jabra dongles and headsets on Linux.
 
 <div align="center">
   <img src="./src/image.png" alt="How jLink look" style="max-width: 100%; height: auto;">
