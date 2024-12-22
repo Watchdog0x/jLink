@@ -5,7 +5,9 @@
 
 jLink is a command-line utility for controlling your Jabra headset.
 
- <img src="src/image.png"/>
+<div align="center">
+  <img src="./src/image.png" alt="How jLink look" style="max-width: 100%; height: auto;">
+</div>
 
 ## Features
     - Basic Control: Manage basic functions of your Jabra headset.
