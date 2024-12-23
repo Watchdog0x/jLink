@@ -1,10 +1,12 @@
-# jLink 
+# jLink: Jabra Direct for Linux
 
 [![GitHub Release](https://img.shields.io/github/v/release/Watchdog0x/jLink)](https://github.com/Watchdog0x/jLink/releases)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Watchdog0x/jLink/blob/main/LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Watchdog0x/jLink)](https://goreportcard.com/report/github.com/Watchdog0x/jLink)
 
-jLink is a command-line utility for controlling your Jabra headset. It supports all Jabra dongles and headsets on Linux.
+jLink is a powerful command-line utility designed to bring full control of your Jabra headsets and dongles to Linux. With support for all Jabra devices, jLink ensures seamless integration and management of your audio hardware on Linux systems.
+
+Get started today and enhance your Jabra device experience on Linux with jLink!
 
 <div align="center">
   <img src="./src/image.png" alt="How jLink look" style="max-width: 100%; height: auto;">
