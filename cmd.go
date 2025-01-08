@@ -81,26 +81,34 @@ func restoreTerminal(oldSettings *unix.Termios) {
 }
 
 func startKeysPressedListener() {
-	buf := make([]byte, 1)
+	buf := make([]byte, 3)
 	for {
-		_, err := os.Stdin.Read(buf)
+		n, err := os.Stdin.Read(buf)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, "Error reading input:", err)
 			continue
 		}
-		key := buf[0]
 
+		// Handle arrow keys (escape sequences)
+		if n >= 3 && buf[0] == 0x1B && buf[1] == '[' {
+			switch buf[2] {
+			case 'A': // Up Arrow
+				handleUpKey()
+			case 'B': // Down Arrow
+				handleDownKey()
+			}
+			continue
+		}
+
+		// Handle single-byte input (e.g., 'w', 's', 'q', etc.)
+		key := buf[0]
 		switch menuState {
 		case 0: // StartMenu
 			switch key {
 			case 'w': // Up
-				if currentSelection > 0 {
-					currentSelection--
-				}
+				handleUpKey()
 			case 's': // Down
-				if currentSelection < len(startMenu)-1 {
-					currentSelection++
-				}
+				handleDownKey()
 			case '\r': // Enter
 				startMenuSelected = currentSelection
 			}
@@ -112,7 +120,6 @@ func startKeysPressedListener() {
 					fmt.Println(err) //  remember to add a error window in the ui
 				}
 				startMenuSelected = -1
-
 			case '1':
 				selectedItemsSearchForNewDevices = 1
 				if len(searchDeviceList.pairedDevices) != 0 {
@@ -129,15 +136,9 @@ func startKeysPressedListener() {
 			case 'q': // Back To Start Menu
 				startMenuSelected = -1
 			case 'w': // Up
-				if currentSelection > 0 {
-					currentSelection--
-				}
+				handleUpKey()
 			case 's': // Down
-				if dongle, exists := deviceManager[selectedDongle]; exists {
-					if currentSelection < len(dongle.pairingList.pairedDevices)-1 {
-						currentSelection++
-					}
-				}
+				handleDownKey()
 			case '1':
 				if err := connectDeviceFromPairedlist(uint16(currentSelection)); err != nil {
 					fmt.Println(err) //  remember to add a error window in the ui
@@ -165,13 +166,9 @@ func startKeysPressedListener() {
 			case 'q': // Back To Start Menu
 				startMenuSelected = -1
 			case 'w': // Up
-				if currentSelection > 0 {
-					currentSelection--
-				}
+				handleUpKey()
 			case 's': // Down
-				if currentSelection < len(dongleSettignsMenu)-1 {
-					currentSelection++
-				}
+				handleDownKey()
 			case '\r': // Enter
 				switch dongleSettignsMenu[currentSelection].id {
 				case 0:
@@ -188,19 +185,42 @@ func startKeysPressedListener() {
 						startMenuSelected = -1
 					}
 				}
-
 			}
-
 		// ############# switch  device ##################
 		case 4:
 			switch key {
 			case 'q': // Back To Start Menu
 				startMenuSelected = -1
 			}
-
 		}
 	}
 }
+
+func handleUpKey() {
+	if currentSelection > 0 {
+		currentSelection--
+	}
+}
+
+func handleDownKey() {
+	switch menuState {
+	case 0: // StartMenu
+		if currentSelection < len(startMenu)-1 {
+			currentSelection++
+		}
+	case 2: // See Remembered Paired Devices
+		if dongle, exists := deviceManager[selectedDongle]; exists {
+			if currentSelection < len(dongle.pairingList.pairedDevices)-1 {
+				currentSelection++
+			}
+		}
+	case 3: // Dongle Settings
+		if currentSelection < len(dongleSettignsMenu)-1 {
+			currentSelection++
+		}
+	}
+}
+
 func moveCursor(row, col int) {
 	fmt.Printf("\033[%d;%dH", row, col) // ANSI escape to move to row and column
 }
