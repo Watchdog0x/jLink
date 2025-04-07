@@ -4,6 +4,20 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Watchdog0x/jLink/blob/main/LICENSE)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Watchdog0x/jLink)](https://goreportcard.com/report/github.com/Watchdog0x/jLink)
 
+
+## 🔧 Update Incoming!
+
+Hey everyone just a heads-up:
+
+An update for **JLink** is coming soon, and you’ll be able to upgrade your firmware easily.
+I’ve completed the first step using the firmware updater. Here's a quick demo of updating my Jabra Evolve2 85 headset from version 1.3.8 to 1.5.4 (the latest):
+```bash
+./update ~/jabraFirmware/new/Firmware/Jabra_Evolve2_85-v1.5.4-ev285t-vector.zip 
+  100% complete                              1.3.8 -> 1.5.4   [0b0e:24ba] Jabra Evolve2 85 UC Data
+```
+
+
+
 jLink is your go-to tool for managing **Jabra headsets and dongles** on Linux. Think of it as **Jabra Direct for Linux**. <br>
 Now you can finally manage your Jabra devices on Linux with ease.
 jLink brings the power of Jabra device management to your Linux system.
